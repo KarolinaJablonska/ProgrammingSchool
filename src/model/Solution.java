@@ -1,3 +1,5 @@
+package model;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -63,6 +65,53 @@ public class Solution {
 				solution.users_id = resultSet.getInt("users_id");
 				return solution;
 			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	public static ArrayList<Solution> loadAllByUserId(int users_id) {
+		try {
+			ArrayList<Solution> userSolutions = new ArrayList<>();
+			PreparedStatement statement = DbManager.getPreparedStatement("SELECT * FROM Solution WHERE users_id = ?");
+			statement.setLong(1, users_id);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Solution solution = new Solution();
+				solution.id = resultSet.getInt("id");
+				solution.created = resultSet.getString("created");
+				solution.updated = resultSet.getString("updated");
+				solution.description = resultSet.getString("description");
+				solution.excercise_id = resultSet.getInt("excercise_id");
+				solution.users_id = resultSet.getInt("users_id");
+				userSolutions.add(solution);
+			}
+			return userSolutions;
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	public static ArrayList<Solution> loadAllByExcerciseId(int excercise_id) {
+		try {
+			ArrayList<Solution> userSolutions = new ArrayList<>();
+			PreparedStatement statement = DbManager
+					.getPreparedStatement("SELECT * FROM Solution WHERE excercise_id = ? ORDER BY updated DESC");
+			statement.setLong(1, excercise_id);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Solution solution = new Solution();
+				solution.id = resultSet.getInt("id");
+				solution.created = resultSet.getString("created");
+				solution.updated = resultSet.getString("updated");
+				solution.description = resultSet.getString("description");
+				solution.excercise_id = resultSet.getInt("excercise_id");
+				solution.users_id = resultSet.getInt("users_id");
+				userSolutions.add(solution);
+			}
+			return userSolutions;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}

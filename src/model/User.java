@@ -1,3 +1,5 @@
+package model;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,6 +68,29 @@ public class User {
 				user.password = resultSet.getString("password");
 				return user;
 			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	public static ArrayList<User> loadAllByGroupId(int person_group_id) {
+		try {
+			ArrayList<User> users = new ArrayList<>();
+			PreparedStatement statement = DbManager
+					.getPreparedStatement("SELECT * FROM Users WHERE person_group_id = ?");
+			statement.setInt(1, person_group_id);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				User user = new User();
+				user.id = resultSet.getInt("id");
+				user.person_group_id = resultSet.getInt("person_group_id");
+				user.email = resultSet.getString("email");
+				user.username = resultSet.getString("username");
+				user.password = resultSet.getString("password");
+				users.add(user);
+			}
+			return users;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
