@@ -1,4 +1,3 @@
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,10 +32,9 @@ public class User {
 	}
 
 	public static ArrayList<User> loadAll() {
-		try (Connection connection = DbManager.getConnection();) {
+		try {
 			ArrayList<User> users = new ArrayList<>();
-			String query = "SELECT * FROM Users";
-			PreparedStatement statement = connection.prepareStatement(query);
+			PreparedStatement statement = DbManager.getPreparedStatement("SELECT * FROM Users");
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				User user = new User();
@@ -55,9 +53,8 @@ public class User {
 	}
 
 	public static User loadById(int id) {
-		try (Connection connection = DbManager.getConnection();) {
-			String query = "SELECT * FROM Users WHERE id=?";
-			PreparedStatement statement = connection.prepareStatement(query);
+		try {
+			PreparedStatement statement = DbManager.getPreparedStatement("SELECT * FROM Users WHERE id=?");
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
@@ -73,6 +70,19 @@ public class User {
 			System.err.println(e.getMessage());
 		}
 		return null;
+	}
+
+	public void delete() {
+		try {
+			if (this.id != 0) {
+				PreparedStatement statement = DbManager.getPreparedStatement("DELETE FROM Users WHERE id = ?");
+				statement.setLong(1, this.id);
+				statement.executeUpdate();
+				this.id = 0;
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	public void saveToDB() {
@@ -108,19 +118,6 @@ public class User {
 			} catch (SQLException e) {
 				System.err.println(e.getMessage());
 			}
-		}
-	}
-
-	public void delete() {
-		try {
-			if (this.id != 0) {
-				PreparedStatement statement = DbManager.getPreparedStatement("DELETE FROM Users WHERE id = ?");
-				statement.setLong(1, this.id);
-				statement.executeUpdate();
-				this.id = 0;
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
 		}
 	}
 }
