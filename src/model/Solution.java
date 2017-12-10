@@ -21,6 +21,10 @@ public class Solution {
 	}
 
 	public Solution(String created, String updated, String description, int excercise_id, int users_id) {
+		setAttributes(created, updated, description, excercise_id, users_id);
+	}
+
+	public void setAttributes(String created, String updated, String description, int excercise_id, int users_id) {
 		this.created = created;
 		this.updated = updated;
 		this.description = description;

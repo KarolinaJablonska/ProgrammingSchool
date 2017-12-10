@@ -2,7 +2,7 @@ package controller;
 
 import java.util.Scanner;
 
-public class Interact {
+public class Interaction {
 
 	private static Scanner scan = new Scanner(System.in);
 
@@ -36,7 +36,19 @@ public class Interact {
 		}
 	}
 
-	public static long getNotNullId() {
+	public static int getIdInt() {
+		System.out.println("Enter user id:");
+
+		int id = scanIntNumber();
+
+		while (id <= 0) {
+			System.out.println("Id has to be integer number greater than 0!");
+			id = scanIntNumber();
+		}
+		return id;
+	}
+
+	public static long getIdLong() {
 		System.out.println("Enter user id:");
 
 		long id = scanLongNumber();

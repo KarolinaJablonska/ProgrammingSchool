@@ -1,20 +1,16 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import model.User;
 
 public class UsersManager {
 
-	static Scanner scan;
-
 	public static void main(String[] args) {
-		scan = new Scanner(System.in);
 		loopWhile: while (true) {
 			showAllUsers();
 			showMenu();
-			switch (Interact.scanCommand()) {
+			switch (Interaction.scanCommand()) {
 			case "add":
 				addUser();
 				break;
@@ -27,11 +23,10 @@ public class UsersManager {
 			case "quit":
 				break loopWhile;
 			default:
-				Interact.tryAgainMessage();
+				Interaction.tryAgainMessage();
 			}
 		}
 		System.out.println("Manager closed");
-		scan.close();
 	}
 
 	public static void showMenu() {
@@ -57,34 +52,34 @@ public class UsersManager {
 
 	public static void addUser() {
 		System.out.println("Enter username:");
-		String username = Interact.scanCommand();
+		String username = Interaction.scanCommand();
 		System.out.println("Enter email:");
-		String email = Interact.scanCommand();
+		String email = Interaction.scanCommand();
 		System.out.println("Enter password:");
-		String password = Interact.scanCommand();
+		String password = Interaction.scanCommand();
 		System.out.println("Enter person_group_id:");
-		int person_group_id = Interact.scanIntNumber();
+		int person_group_id = Interaction.scanIntNumber();
 		User user = new User(person_group_id, username, email, password);
 		user.saveToDB();
 	}
 
 	public static void editUser() {
-		long id = Interact.getNotNullId();
+		long id = Interaction.getIdLong();
 		System.out.println("Enter username:");
-		String username = Interact.scanCommand();
+		String username = Interaction.scanCommand();
 		System.out.println("Enter email:");
-		String email = Interact.scanCommand();
+		String email = Interaction.scanCommand();
 		System.out.println("Enter password:");
-		String password = Interact.scanCommand();
+		String password = Interaction.scanCommand();
 		System.out.println("Enter person_group_id:");
-		int person_group_id = Interact.scanIntNumber();
+		int person_group_id = Interaction.scanIntNumber();
 		User user = User.loadById(id);
-		user.edit(person_group_id, username, email, password);
+		user.setAttributes(person_group_id, username, email, password);
 		user.saveToDB();
 	}
 
 	public static void deleteUser() {
-		long id = Interact.getNotNullId();
+		long id = Interaction.getIdLong();
 		User user = User.loadById(id);
 		user.delete();
 	}

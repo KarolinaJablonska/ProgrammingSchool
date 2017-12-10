@@ -22,6 +22,10 @@ public class User {
 	}
 
 	public User(int person_group_id, String username, String email, String password) {
+		setAttributes(person_group_id, username, email, password);
+	}
+
+	public void setAttributes(int person_group_id, String username, String email, String password) {
 		this.person_group_id = person_group_id;
 		this.username = username;
 		this.email = email;
@@ -108,13 +112,6 @@ public class User {
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
-	}
-
-	public void edit(int person_group_id, String username, String email, String password) {
-		this.person_group_id = person_group_id;
-		this.username = username;
-		this.email = email;
-		setPassword(password);
 	}
 
 	public void saveToDB() {

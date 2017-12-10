@@ -17,6 +17,10 @@ public class Group {
 	}
 
 	public Group(String name) {
+		setAttributes(name);
+	}
+
+	public void setAttributes(String name) {
 		this.name = name;
 	}
 
@@ -85,7 +89,8 @@ public class Group {
 			}
 		} else {
 			try {
-				PreparedStatement statement = DbManager.getPreparedStatement("UPDATE User_group SET name = ? WHERE id = ?");
+				PreparedStatement statement = DbManager
+						.getPreparedStatement("UPDATE User_group SET name = ? WHERE id = ?");
 				statement.setString(1, this.name);
 				statement.setInt(2, this.id);
 				System.out.println(statement);
