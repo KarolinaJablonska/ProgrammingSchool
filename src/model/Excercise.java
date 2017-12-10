@@ -34,7 +34,7 @@ public class Excercise {
 			while (resultSet.next()) {
 				Excercise excercise = new Excercise();
 				excercise.id = resultSet.getInt("id");
-				excercise.title = resultSet.getString("name");
+				excercise.title = resultSet.getString("title");
 				excercise.description = resultSet.getString("description");
 				excercises.add(excercise);
 			}
@@ -105,5 +105,9 @@ public class Excercise {
 				System.err.println(e.getMessage());
 			}
 		}
+	}
+
+	public String toString() {
+		return "id: " + this.id + " | " + "title: " + this.title + " | " + "description: " + this.description;
 	}
 }

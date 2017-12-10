@@ -60,6 +60,7 @@ public class ExcercisesManager {
 	}
 
 	public static void editExcercise() {
+		System.out.println("Enter excercise id:");
 		int id = Interaction.getIdInt();
 		System.out.println("Enter title:");
 		String title = Interaction.scanCommand();
@@ -71,6 +72,7 @@ public class ExcercisesManager {
 	}
 
 	public static void deleteExcercise() {
+		System.out.println("Enter excercise id:");
 		int id = Interaction.getIdInt();
 		Excercise excercise = Excercise.loadById(id);
 		excercise.delete();

@@ -38,7 +38,7 @@ public class GroupsManager {
 	}
 
 	public static void showAllGroups() {
-		System.out.println("All users:");
+		System.out.println("All groups:");
 		ArrayList<Group> allGroupsList = Group.loadAll();
 		if (allGroupsList.isEmpty()) {
 			System.out.println("No groups in database!");
@@ -58,6 +58,7 @@ public class GroupsManager {
 	}
 
 	public static void editGroup() {
+		System.out.println("Enter group id:");
 		int id = Interaction.getIdInt();
 		System.out.println("Enter name:");
 		String name = Interaction.scanCommand();
@@ -67,6 +68,7 @@ public class GroupsManager {
 	}
 
 	public static void deleteGroup() {
+		System.out.println("Enter group id:");
 		int id = Interaction.getIdInt();
 		Group group = Group.loadById(id);
 		group.delete();

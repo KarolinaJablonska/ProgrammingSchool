@@ -100,4 +100,8 @@ public class Group {
 			}
 		}
 	}
+
+	public String toString() {
+		return "id: " + this.id + " | " + "name: " + this.name;
+	}
 }

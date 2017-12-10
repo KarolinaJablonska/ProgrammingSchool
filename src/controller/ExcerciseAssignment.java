@@ -34,8 +34,10 @@ public class ExcerciseAssignment {
 
 	public static void assignExcercise() {
 		UsersManager.showAllUsers();
+		System.out.println("Enter user id:");
 		long userId = Interaction.getIdLong();
 		ExcercisesManager.showAllExcercises();
+		System.out.println("Enter excercise id:");
 		int excerciseId = Interaction.getIdInt();
 		Solution solution = new Solution("NOW()", "", "", excerciseId, userId);
 		solution.saveToDB();
@@ -43,6 +45,7 @@ public class ExcerciseAssignment {
 
 	public static void viewUserSolutions() {
 		UsersManager.showAllUsers();
+		System.out.println("Enter user id:");
 		long userId = Interaction.getIdLong();
 		ArrayList<Solution> allUserSolutions = Solution.loadAllByUserId(userId);
 		if (allUserSolutions.isEmpty()) {

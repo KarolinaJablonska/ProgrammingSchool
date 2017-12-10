@@ -64,6 +64,7 @@ public class UsersManager {
 	}
 
 	public static void editUser() {
+		System.out.println("Enter user id:");
 		long id = Interaction.getIdLong();
 		System.out.println("Enter username:");
 		String username = Interaction.scanCommand();
@@ -79,6 +80,7 @@ public class UsersManager {
 	}
 
 	public static void deleteUser() {
+		System.out.println("Enter user id:");
 		long id = Interaction.getIdLong();
 		User user = User.loadById(id);
 		user.delete();

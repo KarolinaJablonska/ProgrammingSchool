@@ -37,8 +37,6 @@ public class Interaction {
 	}
 
 	public static int getIdInt() {
-		System.out.println("Enter user id:");
-
 		int id = scanIntNumber();
 
 		while (id <= 0) {
@@ -49,8 +47,6 @@ public class Interaction {
 	}
 
 	public static long getIdLong() {
-		System.out.println("Enter user id:");
-
 		long id = scanLongNumber();
 
 		while (id <= 0) {
