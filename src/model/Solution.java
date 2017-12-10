@@ -14,17 +14,17 @@ public class Solution {
 	private String updated;
 	private String description;
 	private int excercise_id;
-	private int users_id;
+	private long users_id;
 
 	public Solution() {
 
 	}
 
-	public Solution(String created, String updated, String description, int excercise_id, int users_id) {
+	public Solution(String created, String updated, String description, int excercise_id, long users_id) {
 		setAttributes(created, updated, description, excercise_id, users_id);
 	}
 
-	public void setAttributes(String created, String updated, String description, int excercise_id, int users_id) {
+	public void setAttributes(String created, String updated, String description, int excercise_id, long users_id) {
 		this.created = created;
 		this.updated = updated;
 		this.description = description;
@@ -75,7 +75,7 @@ public class Solution {
 		return null;
 	}
 
-	public static ArrayList<Solution> loadAllByUserId(int users_id) {
+	public static ArrayList<Solution> loadAllByUserId(long users_id) {
 		try {
 			ArrayList<Solution> userSolutions = new ArrayList<>();
 			PreparedStatement statement = DbManager.getPreparedStatement("SELECT * FROM Solution WHERE users_id = ?");
@@ -171,6 +171,12 @@ public class Solution {
 				System.err.println(e.getMessage());
 			}
 		}
+	}
+
+	public String toString() {
+		return "id: " + this.id + " | " + "created: " + this.created + " | " + "updated: " + this.updated + " | "
+				+ "description: " + this.description + " | " + "excercise_id: " + this.excercise_id + " | "
+				+ "users_id: " + this.users_id;
 	}
 
 }
