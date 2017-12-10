@@ -39,7 +39,7 @@ public class ExcerciseAssignment {
 		ExcercisesManager.showAllExcercises();
 		System.out.println("Enter excercise id:");
 		int excerciseId = Interaction.getIdInt();
-		Solution solution = new Solution("NOW()", "", "", excerciseId, userId);
+		Solution solution = new Solution(Interaction.getCurrentDateSql(), null, "", excerciseId, userId);
 		solution.saveToDB();
 	}
 

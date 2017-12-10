@@ -39,19 +39,8 @@ public class User {
 
 	public static ArrayList<User> loadAll() {
 		try {
-			ArrayList<User> users = new ArrayList<>();
 			PreparedStatement statement = DbManager.getPreparedStatement("SELECT * FROM Users");
-			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				User user = new User();
-				user.id = resultSet.getLong("id");
-				user.person_group_id = resultSet.getInt("person_group_id");
-				user.email = resultSet.getString("email");
-				user.username = resultSet.getString("username");
-				user.password = resultSet.getString("password");
-				users.add(user);
-			}
-			return users;
+			return createUsersListFromStatement(statement);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -72,29 +61,6 @@ public class User {
 				user.password = resultSet.getString("password");
 				return user;
 			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-		return null;
-	}
-
-	public static ArrayList<User> loadAllByGroupId(int person_group_id) {
-		try {
-			ArrayList<User> users = new ArrayList<>();
-			PreparedStatement statement = DbManager
-					.getPreparedStatement("SELECT * FROM Users WHERE person_group_id = ?");
-			statement.setInt(1, person_group_id);
-			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				User user = new User();
-				user.id = resultSet.getLong("id");
-				user.person_group_id = resultSet.getInt("person_group_id");
-				user.email = resultSet.getString("email");
-				user.username = resultSet.getString("username");
-				user.password = resultSet.getString("password");
-				users.add(user);
-			}
-			return users;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -148,6 +114,34 @@ public class User {
 				System.err.println(e.getMessage());
 			}
 		}
+	}
+
+	public static ArrayList<User> loadAllByGroupId(int person_group_id) {
+		try {
+			PreparedStatement statement = DbManager
+					.getPreparedStatement("SELECT * FROM Users WHERE person_group_id = ?");
+			statement.setInt(1, person_group_id);
+			return createUsersListFromStatement(statement);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	public static ArrayList<User> createUsersListFromStatement(PreparedStatement statement) throws SQLException {
+		ArrayList<User> usersList = new ArrayList<>();
+		ResultSet resultSet = statement.executeQuery();
+
+		while (resultSet.next()) {
+			User user = new User();
+			user.id = resultSet.getLong("id");
+			user.person_group_id = resultSet.getInt("person_group_id");
+			user.email = resultSet.getString("email");
+			user.username = resultSet.getString("username");
+			user.password = resultSet.getString("password");
+			usersList.add(user);
+		}
+		return usersList;
 	}
 
 	public String toString() {

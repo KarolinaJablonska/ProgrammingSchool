@@ -28,17 +28,8 @@ public class Excercise {
 
 	public static ArrayList<Excercise> loadAll() {
 		try {
-			ArrayList<Excercise> excercises = new ArrayList<>();
 			PreparedStatement statement = DbManager.getPreparedStatement("SELECT * FROM Excercise");
-			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				Excercise excercise = new Excercise();
-				excercise.id = resultSet.getInt("id");
-				excercise.title = resultSet.getString("title");
-				excercise.description = resultSet.getString("description");
-				excercises.add(excercise);
-			}
-			return excercises;
+			return createExcercisesListFromStatement(statement);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -105,6 +96,69 @@ public class Excercise {
 				System.err.println(e.getMessage());
 			}
 		}
+	}
+
+	public static ArrayList<Excercise> loadUnsolvedOfUser(long userId) {
+		try {
+			PreparedStatement statement = DbManager
+					.getPreparedStatement("SELECT Excercise.id, Excercise.title, Excercise.description "
+							+ "FROM Excercise JOIN Solution ON Excercise.id = Solution.excercise_id "
+							+ " WHERE Solution.users_id = ? AND Solution.updated IS NULL;");
+			statement.setLong(1, userId);
+			return createExcercisesListFromStatement(statement);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	public static ArrayList<Excercise> loadSolvedOfUser(long userId) {
+		try {
+			PreparedStatement statement = DbManager
+					.getPreparedStatement("SELECT Excercise.id, Excercise.title, Excercise.description "
+							+ "FROM Excercise JOIN Solution ON Excercise.id = Solution.excercise_id "
+							+ " WHERE Solution.users_id = ? AND Solution.updated IS NOT NULL;");
+			statement.setLong(1, userId);
+			return createExcercisesListFromStatement(statement);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	public static ArrayList<Integer> getIndexesUnsolvedOfUser(long userId) {
+		try {
+			ArrayList<Integer> indexesOfUnsolved = new ArrayList<>();
+			PreparedStatement statement = DbManager
+					.getPreparedStatement("SELECT Excercise.id, Excercise.title, Excercise.description "
+							+ "FROM Excercise JOIN Solution ON Excercise.id = Solution.excercise_id "
+							+ " WHERE Solution.users_id = ? AND Solution.updated IS NULL;");
+			statement.setLong(1, userId);
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				indexesOfUnsolved.add(resultSet.getInt("id"));
+			}
+			return indexesOfUnsolved;
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	public static ArrayList<Excercise> createExcercisesListFromStatement(PreparedStatement statement)
+			throws SQLException {
+		ArrayList<Excercise> excercisesList = new ArrayList<>();
+		ResultSet resultSet = statement.executeQuery();
+
+		while (resultSet.next()) {
+			Excercise excercise = new Excercise();
+			excercise.id = resultSet.getInt("id");
+			excercise.title = resultSet.getString("title");
+			excercise.description = resultSet.getString("description");
+			excercisesList.add(excercise);
+		}
+		return excercisesList;
 	}
 
 	public String toString() {

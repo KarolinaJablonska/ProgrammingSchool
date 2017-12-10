@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,8 +11,8 @@ import sql.DbManager;
 public class Solution {
 
 	private int id;
-	private String created;
-	private String updated;
+	private Date created;
+	private Date updated;
 	private String description;
 	private int excercise_id;
 	private long users_id;
@@ -20,16 +21,21 @@ public class Solution {
 
 	}
 
-	public Solution(String created, String updated, String description, int excercise_id, long users_id) {
+	public Solution(Date created, Date updated, String description, int excercise_id, long users_id) {
 		setAttributes(created, updated, description, excercise_id, users_id);
 	}
 
-	public void setAttributes(String created, String updated, String description, int excercise_id, long users_id) {
+	public void setAttributes(Date created, Date updated, String description, int excercise_id, long users_id) {
 		this.created = created;
 		this.updated = updated;
 		this.description = description;
 		this.excercise_id = excercise_id;
 		this.users_id = users_id;
+	}
+
+	public void setTheSolution(Date updated, String description) {
+		this.updated = updated;
+		this.description = description;
 	}
 
 	public static ArrayList<Solution> loadAll() {
@@ -40,8 +46,8 @@ public class Solution {
 			while (resultSet.next()) {
 				Solution solution = new Solution();
 				solution.id = resultSet.getInt("id");
-				solution.created = resultSet.getString("created");
-				solution.updated = resultSet.getString("updated");
+				solution.created = resultSet.getDate("created");
+				solution.updated = resultSet.getDate("updated");
 				solution.description = resultSet.getString("description");
 				solution.excercise_id = resultSet.getInt("excercise_id");
 				solution.users_id = resultSet.getInt("users_id");
@@ -62,8 +68,53 @@ public class Solution {
 			while (resultSet.next()) {
 				Solution solution = new Solution();
 				solution.id = resultSet.getInt("id");
-				solution.created = resultSet.getString("created");
-				solution.updated = resultSet.getString("updated");
+				solution.created = resultSet.getDate("created");
+				solution.updated = resultSet.getDate("updated");
+				solution.description = resultSet.getString("description");
+				solution.excercise_id = resultSet.getInt("excercise_id");
+				solution.users_id = resultSet.getInt("users_id");
+				return solution;
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	public static Solution loadByExcerciseId(int excerciseId) {
+		try {
+			PreparedStatement statement = DbManager
+					.getPreparedStatement("SELECT * FROM Solution WHERE excercise_id = ?");
+			statement.setInt(1, excerciseId);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Solution solution = new Solution();
+				solution.id = resultSet.getInt("id");
+				solution.created = resultSet.getDate("created");
+				solution.updated = resultSet.getDate("updated");
+				solution.description = resultSet.getString("description");
+				solution.excercise_id = resultSet.getInt("excercise_id");
+				solution.users_id = resultSet.getInt("users_id");
+				return solution;
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	public static Solution loadByExcerciseAndUserId(int excerciseId, long userId) {
+		try {
+			PreparedStatement statement = DbManager
+					.getPreparedStatement("SELECT * FROM Solution WHERE excercise_id = ? AND users_id = ?");
+			statement.setInt(1, excerciseId);
+			statement.setLong(2, userId);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Solution solution = new Solution();
+				solution.id = resultSet.getInt("id");
+				solution.created = resultSet.getDate("created");
+				solution.updated = resultSet.getDate("updated");
 				solution.description = resultSet.getString("description");
 				solution.excercise_id = resultSet.getInt("excercise_id");
 				solution.users_id = resultSet.getInt("users_id");
@@ -84,8 +135,8 @@ public class Solution {
 			while (resultSet.next()) {
 				Solution solution = new Solution();
 				solution.id = resultSet.getInt("id");
-				solution.created = resultSet.getString("created");
-				solution.updated = resultSet.getString("updated");
+				solution.created = resultSet.getDate("created");
+				solution.updated = resultSet.getDate("updated");
 				solution.description = resultSet.getString("description");
 				solution.excercise_id = resultSet.getInt("excercise_id");
 				solution.users_id = resultSet.getInt("users_id");
@@ -108,8 +159,8 @@ public class Solution {
 			while (resultSet.next()) {
 				Solution solution = new Solution();
 				solution.id = resultSet.getInt("id");
-				solution.created = resultSet.getString("created");
-				solution.updated = resultSet.getString("updated");
+				solution.created = resultSet.getDate("created");
+				solution.updated = resultSet.getDate("updated");
 				solution.description = resultSet.getString("description");
 				solution.excercise_id = resultSet.getInt("excercise_id");
 				solution.users_id = resultSet.getInt("users_id");
@@ -142,8 +193,8 @@ public class Solution {
 				PreparedStatement statement = DbManager.getPreparedStatement(
 						"INSERT INTO Solution(created, updated, description, excercise_id, users_id) VALUES(?, ?, ?, ?, ?)",
 						generatedColumns);
-				statement.setString(1, this.created);
-				statement.setString(2, this.updated);
+				statement.setDate(1, this.created);
+				statement.setDate(2, this.updated);
 				statement.setString(3, this.description);
 				statement.setInt(4, this.excercise_id);
 				statement.setLong(5, this.users_id);
@@ -159,8 +210,8 @@ public class Solution {
 			try {
 				PreparedStatement statement = DbManager.getPreparedStatement(
 						"UPDATE Solution SET created = ?, updated = ?, description = ?, excercise_id = ?, users_id = ? WHERE id = ?");
-				statement.setString(1, this.created);
-				statement.setString(2, this.updated);
+				statement.setDate(1, this.created);
+				statement.setDate(2, this.updated);
 				statement.setString(3, this.description);
 				statement.setInt(4, this.excercise_id);
 				statement.setLong(5, this.users_id);

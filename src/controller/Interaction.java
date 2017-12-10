@@ -60,4 +60,9 @@ public class Interaction {
 		System.out.println("Try again");
 	}
 
+	public static java.sql.Date getCurrentDateSql() {
+		java.util.Date utilDate = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(utilDate.getTime());
+		return date;
+	}
 }
