@@ -154,7 +154,7 @@ public class Solution {
 		} else {
 			try {
 				PreparedStatement statement = DbManager.getPreparedStatement(
-						"UPDATE Solution SET created = ?, updated = ?, description = ?, excercise_id = ?, users_id = ?, id = ?");
+						"UPDATE Solution SET created = ?, updated = ?, description = ?, excercise_id = ?, users_id = ? WHERE id = ?");
 				statement.setString(1, this.created);
 				statement.setString(2, this.updated);
 				statement.setString(3, this.description);

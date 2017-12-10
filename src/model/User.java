@@ -11,7 +11,7 @@ import sql.DbManager;
 
 public class User {
 
-	private int id;
+	private long id;
 	private int person_group_id;
 	private String username;
 	private String email;
@@ -40,7 +40,7 @@ public class User {
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				User user = new User();
-				user.id = resultSet.getInt("id");
+				user.id = resultSet.getLong("id");
 				user.person_group_id = resultSet.getInt("person_group_id");
 				user.email = resultSet.getString("email");
 				user.username = resultSet.getString("username");
@@ -54,14 +54,14 @@ public class User {
 		return null;
 	}
 
-	public static User loadById(int id) {
+	public static User loadById(long id) {
 		try {
 			PreparedStatement statement = DbManager.getPreparedStatement("SELECT * FROM Users WHERE id=?");
-			statement.setInt(1, id);
+			statement.setLong(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				User user = new User();
-				user.id = resultSet.getInt("id");
+				user.id = resultSet.getLong("id");
 				user.person_group_id = resultSet.getInt("person_group_id");
 				user.email = resultSet.getString("email");
 				user.username = resultSet.getString("username");
@@ -83,7 +83,7 @@ public class User {
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				User user = new User();
-				user.id = resultSet.getInt("id");
+				user.id = resultSet.getLong("id");
 				user.person_group_id = resultSet.getInt("person_group_id");
 				user.email = resultSet.getString("email");
 				user.username = resultSet.getString("username");
@@ -110,6 +110,13 @@ public class User {
 		}
 	}
 
+	public void edit(int person_group_id, String username, String email, String password) {
+		this.person_group_id = person_group_id;
+		this.username = username;
+		this.email = email;
+		setPassword(password);
+	}
+
 	public void saveToDB() {
 		if (this.id == 0) {
 			try {
@@ -124,7 +131,7 @@ public class User {
 				statement.executeUpdate();
 				ResultSet resultSet = statement.getGeneratedKeys();
 				if (resultSet.next()) {
-					this.id = resultSet.getInt(1);
+					this.id = resultSet.getLong(1);
 				}
 			} catch (SQLException e) {
 				System.err.println(e.getMessage());
@@ -132,17 +139,22 @@ public class User {
 		} else {
 			try {
 				PreparedStatement statement = DbManager.getPreparedStatement(
-						"UPDATE Users SET username = ?, email = ?, person_group_id = ?, password = ?, id = ?");
+						"UPDATE Users SET username = ?, email = ?, person_group_id = ?, password = ? WHERE id = ?");
 				statement.setString(1, this.username);
 				statement.setString(2, this.email);
 				statement.setInt(3, this.person_group_id);
 				statement.setString(4, this.password);
-				statement.setInt(5, this.id);
+				statement.setLong(5, this.id);
 				System.out.println(statement);
 				statement.executeUpdate();
 			} catch (SQLException e) {
 				System.err.println(e.getMessage());
 			}
 		}
+	}
+
+	public String toString() {
+		return "id: " + this.id + " | " + "person_group_id: " + this.person_group_id + " | " + "username: "
+				+ this.username + " | " + "email: " + this.email;
 	}
 }

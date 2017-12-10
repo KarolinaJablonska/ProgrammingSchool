@@ -85,7 +85,7 @@ public class Group {
 			}
 		} else {
 			try {
-				PreparedStatement statement = DbManager.getPreparedStatement("UPDATE User_group SET name = ?, id = ?");
+				PreparedStatement statement = DbManager.getPreparedStatement("UPDATE User_group SET name = ? WHERE id = ?");
 				statement.setString(1, this.name);
 				statement.setInt(2, this.id);
 				System.out.println(statement);
