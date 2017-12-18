@@ -1,8 +1,10 @@
-package controller;
+package pl.coderslab.console;
 
 import java.util.ArrayList;
 
-import model.User;
+import pl.coderslab.dao.UserDao;
+import pl.coderslab.model.Interaction;
+import pl.coderslab.model.User;
 
 public class UsersManager {
 
@@ -39,7 +41,7 @@ public class UsersManager {
 
 	public static void showAllUsers() {
 		System.out.println("All users:");
-		ArrayList<User> allUsersList = User.loadAll();
+		ArrayList<User> allUsersList = UserDao.findAll();
 		if (allUsersList.isEmpty()) {
 			System.out.println("No users in database!");
 		} else {
@@ -60,7 +62,7 @@ public class UsersManager {
 		System.out.println("Enter person_group_id:");
 		int person_group_id = Interaction.scanIntNumber();
 		User user = new User(person_group_id, username, email, password);
-		user.saveToDB();
+		UserDao.saveToDB(user);
 	}
 
 	public static void editUser() {
@@ -74,15 +76,15 @@ public class UsersManager {
 		String password = Interaction.scanCommand();
 		System.out.println("Enter person_group_id:");
 		int person_group_id = Interaction.scanIntNumber();
-		User user = User.loadById(id);
+		User user = UserDao.findById(id);
 		user.setAttributes(person_group_id, username, email, password);
-		user.saveToDB();
+		UserDao.saveToDB(user);
 	}
 
 	public static void deleteUser() {
 		System.out.println("Enter user id:");
 		long id = Interaction.getIdLong();
-		User user = User.loadById(id);
-		user.delete();
+		User user = UserDao.findById(id);
+		UserDao.delete(user);
 	}
 }

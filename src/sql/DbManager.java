@@ -1,30 +1,38 @@
 package sql;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class DbManager {
 
+	private static DataSource dataSource;
 	static Connection connection;
 
-	public static Connection getConnection() throws Exception {
-		String url = "jdbc:mysql://localhost:3306/";
-		String dbName = "ProgrammingSchool";
-		String userName = "root";
-		String password = "coderslab";
-		if (connection == null) {
-			connection = DriverManager.getConnection(url + dbName + "?useSSL=false", userName, password);
-		} else if (connection.isClosed()) {
-			connection = DriverManager.getConnection(url + dbName + "?useSSL=false", userName, password);
+	public static Connection getConn() throws SQLException {
+		return getInstance().getConnection();
+	}
+
+	private static DataSource getInstance() {
+		if (dataSource == null) {
+			try {
+				Context ctx = new InitialContext();
+				dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/ProgrammingSchool");
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
 		}
-		return connection;
+		return dataSource;
 	}
 
 	public static PreparedStatement getPreparedStatement(String sqlQuery) {
 		try {
-			return getConnection().prepareStatement(sqlQuery);
+			return getConn().prepareStatement(sqlQuery);
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} catch (Exception e) {
@@ -35,7 +43,7 @@ public class DbManager {
 
 	public static PreparedStatement getPreparedStatement(String sqlQuery, String[] generatedColumns) {
 		try {
-			return getConnection().prepareStatement(sqlQuery, generatedColumns);
+			return getConn().prepareStatement(sqlQuery, generatedColumns);
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} catch (Exception e) {

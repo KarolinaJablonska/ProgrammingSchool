@@ -1,8 +1,10 @@
-package controller;
+package pl.coderslab.console;
 
 import java.util.ArrayList;
 
-import model.Excercise;
+import pl.coderslab.dao.ExcerciseDao;
+import pl.coderslab.model.Excercise;
+import pl.coderslab.model.Interaction;
 
 public class ExcercisesManager {
 
@@ -39,7 +41,7 @@ public class ExcercisesManager {
 
 	public static void showAllExcercises() {
 		System.out.println("All excercises:");
-		ArrayList<Excercise> allExcercisesList = Excercise.loadAll();
+		ArrayList<Excercise> allExcercisesList = ExcerciseDao.findAll();
 		if (allExcercisesList.isEmpty()) {
 			System.out.println("No excercises in database!");
 		} else {
@@ -56,7 +58,7 @@ public class ExcercisesManager {
 		System.out.println("Enter description:");
 		String description = Interaction.scanCommand();
 		Excercise excercise = new Excercise(title, description);
-		excercise.saveToDB();
+		ExcerciseDao.saveToDB(excercise);
 	}
 
 	public static void editExcercise() {
@@ -66,15 +68,16 @@ public class ExcercisesManager {
 		String title = Interaction.scanCommand();
 		System.out.println("Enter description:");
 		String description = Interaction.scanCommand();
-		Excercise excercise = Excercise.loadById(id);
-		excercise.setAttributes(title, description);
-		excercise.saveToDB();
+		Excercise excercise = ExcerciseDao.findById(id);
+		excercise.setTitle(title);
+		excercise.setDescription(description);
+		ExcerciseDao.saveToDB(excercise);
 	}
 
 	public static void deleteExcercise() {
 		System.out.println("Enter excercise id:");
 		int id = Interaction.getIdInt();
-		Excercise excercise = Excercise.loadById(id);
-		excercise.delete();
+		Excercise excercise = ExcerciseDao.findById(id);
+		ExcerciseDao.delete(excercise);
 	}
 }

@@ -1,8 +1,12 @@
-package controller;
+package pl.coderslab.console;
 
 import java.util.ArrayList;
 
-import model.Solution;
+import pl.coderslab.console.ExcercisesManager;
+import pl.coderslab.console.UsersManager;
+import pl.coderslab.dao.SolutionDao;
+import pl.coderslab.model.Interaction;
+import pl.coderslab.model.Solution;
 
 public class ExcerciseAssignment {
 
@@ -40,14 +44,14 @@ public class ExcerciseAssignment {
 		System.out.println("Enter excercise id:");
 		int excerciseId = Interaction.getIdInt();
 		Solution solution = new Solution(Interaction.getCurrentDateSql(), null, "", excerciseId, userId);
-		solution.saveToDB();
+		SolutionDao.saveToDB(solution);
 	}
 
 	public static void viewUserSolutions() {
 		UsersManager.showAllUsers();
 		System.out.println("Enter user id:");
 		long userId = Interaction.getIdLong();
-		ArrayList<Solution> allUserSolutions = Solution.loadAllByUserId(userId);
+		ArrayList<Solution> allUserSolutions = SolutionDao.findAllByUserId(userId);
 		if (allUserSolutions.isEmpty()) {
 			System.out.println("No solutions for user (id=" + userId + ")!");
 		} else {

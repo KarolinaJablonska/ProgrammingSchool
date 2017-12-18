@@ -1,4 +1,4 @@
-package controller;
+package pl.coderslab.model;
 
 import java.util.Scanner;
 
@@ -9,7 +9,6 @@ public class Interaction {
 	public static String scanCommand() {
 		while (!scan.hasNextLine()) {
 			scan.nextLine();
-			tryAgainMessage();
 		}
 		return scan.nextLine();
 	}

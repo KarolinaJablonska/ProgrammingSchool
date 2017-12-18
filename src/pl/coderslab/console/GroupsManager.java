@@ -1,8 +1,10 @@
-package controller;
+package pl.coderslab.console;
 
 import java.util.ArrayList;
 
-import model.Group;
+import pl.coderslab.dao.GroupDao;
+import pl.coderslab.model.Group;
+import pl.coderslab.model.Interaction;
 
 public class GroupsManager {
 
@@ -39,7 +41,7 @@ public class GroupsManager {
 
 	public static void showAllGroups() {
 		System.out.println("All groups:");
-		ArrayList<Group> allGroupsList = Group.loadAll();
+		ArrayList<Group> allGroupsList = GroupDao.findAll();
 		if (allGroupsList.isEmpty()) {
 			System.out.println("No groups in database!");
 		} else {
@@ -54,7 +56,7 @@ public class GroupsManager {
 		System.out.println("Enter name:");
 		String name = Interaction.scanCommand();
 		Group group = new Group(name);
-		group.saveToDB();
+		GroupDao.saveToDB(group);
 	}
 
 	public static void editGroup() {
@@ -62,15 +64,15 @@ public class GroupsManager {
 		int id = Interaction.getIdInt();
 		System.out.println("Enter name:");
 		String name = Interaction.scanCommand();
-		Group group = Group.loadById(id);
+		Group group = GroupDao.findById(id);
 		group.setAttributes(name);
-		group.saveToDB();
+		GroupDao.saveToDB(group);
 	}
 
 	public static void deleteGroup() {
 		System.out.println("Enter group id:");
 		int id = Interaction.getIdInt();
-		Group group = Group.loadById(id);
-		group.delete();
+		Group group = GroupDao.findById(id);
+		GroupDao.delete(group);
 	}
 }
