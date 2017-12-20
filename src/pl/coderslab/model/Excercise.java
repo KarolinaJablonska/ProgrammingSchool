@@ -11,6 +11,10 @@ public class Excercise {
 	}
 
 	public Excercise(String title, String description) {
+		setAttributes(title, description);
+	}
+
+	public void setAttributes(String title, String description) {
 		setTitle(title);
 		setDescription(description);
 	}

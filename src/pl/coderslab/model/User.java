@@ -7,6 +7,23 @@ public class User {
 	private long id;
 	private int person_group_id;
 	private String username;
+	private String email;
+	private String password;
+
+	public User() {
+
+	}
+
+	public User(int person_group_id, String username, String email, String password) {
+		setAttributes(person_group_id, username, email, password);
+	}
+
+	public void setAttributes(int person_group_id, String username, String email, String password) {
+		this.person_group_id = person_group_id;
+		this.username = username;
+		this.email = email;
+		setPassword(password);
+	}
 
 	public long getId() {
 		return id;
@@ -42,24 +59,6 @@ public class User {
 
 	public String getPassword() {
 		return password;
-	}
-
-	private String email;
-	private String password;
-
-	public User() {
-
-	}
-
-	public User(int person_group_id, String username, String email, String password) {
-		setAttributes(person_group_id, username, email, password);
-	}
-
-	public void setAttributes(int person_group_id, String username, String email, String password) {
-		this.person_group_id = person_group_id;
-		this.username = username;
-		this.email = email;
-		setPassword(password);
 	}
 
 	public void setPassword(String password) {

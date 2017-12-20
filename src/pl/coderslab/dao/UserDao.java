@@ -77,8 +77,8 @@ public class UserDao {
 				PreparedStatement statement = DbManager.getPreparedStatement(UPDATE_QUERY);
 				statement.setString(1, user.getUsername());
 				statement.setString(2, user.getEmail());
-				statement.setString(3, user.getPassword());
-				statement.setInt(4, user.getPerson_group_id());
+				statement.setInt(3, user.getPerson_group_id());
+				statement.setString(4, user.getPassword());
 				statement.setLong(5, user.getId());
 				System.out.println(statement);
 				statement.executeUpdate();

@@ -19,7 +19,6 @@
 -- Table structure for table `Excercise`
 --
 
-
 DROP TABLE IF EXISTS `Excercise`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -28,7 +27,7 @@ CREATE TABLE `Excercise` (
   `title` varchar(255) COLLATE utf8_polish_ci DEFAULT NULL,
   `description` text COLLATE utf8_polish_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +36,7 @@ CREATE TABLE `Excercise` (
 
 LOCK TABLES `Excercise` WRITE;
 /*!40000 ALTER TABLE `Excercise` DISABLE KEYS */;
-INSERT INTO `Excercise` VALUES (1,'for each loop','use for each loop to print all numbers from table [0...12]'),(2,'first app','use java to make your very first working app printing Hello World on the screen'),(3,'guess a number','write the app: you pick one number from 0 to 100 and your computer guesses what is the number'),(4,'create database','your task is to create new database using Linux terminal. Add three tables: id, name, time'),(5,'do your best','write an app that count how many times per second you can click a mouse button'),(6,'create your web','create your very first website using html & css, maybe you tell people about your hobbys?'),(7,'print a Christmas tree','use table and loop to print Christmas tree consisting of *'),(8,'remember 10 words','write an app that will print 10 words for 10 seconds and then hide it, your job is to write them all'),(9,'darts calculator','create simple 501 darts game calculator that will subtrackt given score from 501 up to exact 0'),(10,'pinball game','your task is to create pinball game engine in java');
+INSERT INTO `Excercise` VALUES (1,'for each loop','use for each loop to print all numbers from table [0...12]'),(2,'first app','use java to make your very first working app printing Hello World on the screen'),(3,'guess a number','write the app: you pick one number from 0 to 100 and your computer guesses what is the number'),(4,'create database','your task is to create new database using Linux terminal. Add three tables: id, name, time'),(5,'do your best','write an app that count how many times per second you can click a mouse button'),(6,'create your web','create your very first website using html & css, maybe you tell people about your hobbys?'),(7,'print a Christmas tree','use table and loop to print Christmas tree consisting of *'),(8,'remember 10 words','write an app that will print 10 words for 10 seconds and then hide it, your job is to write them all'),(9,'darts calculator','create simple 501 darts game calculator that will subtrackt given score from 501 up to exact 0'),(10,'pinball game','your task is to create pinball game engine in java'),(11,'Is even or not','write function that returns true if input is even & returns false if input is odd'),(12,'convert to uppercase','write method that returns input string always uppercased'),(13,'name search','prepare method that returns boolean result of query: does input text include input name?'),(14,'digit occurence in array','prepare function that returns occurences number of input digit in input array'),(15,'decimal to hex','convert decimal number to hex number in created method'),(16,'math operators','write calculator app using all standard mathematic operators in Java');
 /*!40000 ALTER TABLE `Excercise` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,4 +134,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-10 19:09:16
+-- Dump completed on 2017-12-20 15:56:46

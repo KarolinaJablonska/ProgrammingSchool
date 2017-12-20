@@ -1,7 +1,8 @@
-<?xml	version="1.0"	encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <Context>
-	<Resource name="jdbc/ProgrammingSchool" auth="Container" type="javax.sql.DataSource"
+	<Resource name="jdbc/ProgrammingSchool" auth="Application" type="javax.sql.DataSource"
 		username="root" password="coderslab" driverClassName="com.mysql.jdbc.Driver"
-		url="jdbc:mysql://localhost:3306/ProgrammingSchool" maxActive="100" maxIdle="30"
-		maxWait="10000" />
+		url="jdbc:mysql://localhost:3306/ProgrammingSchool?useSSL=false" maxTotal="-1" maxIdle="-1"
+		maxWaitMillis="-1" />
 </Context>

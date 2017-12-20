@@ -11,6 +11,7 @@ import sql.DbManager;
 public class SolutionDao {
 
 	private static final String FIND_ALL_SOLUTUIONS_QUERY = "SELECT * FROM Solution";
+	private static final String FIND_ALL_SOLUTUIONS_WITH_LIMIT_QUERY = "SELECT * FROM Solution ORDER BY updated DESC LIMIT ?";
 	private static final String FIND_ALL_BY_USER_ID_QUERY = "SELECT * FROM Solution WHERE users_id = ?";
 	private static final String FIND_ALL_BY_EXCERCISE_ID_NEWEST_QUERY = "SELECT * FROM Solution WHERE excercise_id = ? ORDER BY updated DESC";
 	private static final String FIND_BY_ID_QUERY = "SELECT * FROM Solution WHERE id = ?";
@@ -24,6 +25,23 @@ public class SolutionDao {
 		try {
 			ArrayList<Solution> solutions = new ArrayList<>();
 			PreparedStatement statement = DbManager.getPreparedStatement(FIND_ALL_SOLUTUIONS_QUERY);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Solution solution = getSolutionFromResultSet(resultSet);
+				solutions.add(solution);
+			}
+			return solutions;
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	public static ArrayList<Solution> findAll(int limit) {
+		try {
+			ArrayList<Solution> solutions = new ArrayList<>();
+			PreparedStatement statement = DbManager.getPreparedStatement(FIND_ALL_SOLUTUIONS_WITH_LIMIT_QUERY);
+			statement.setInt(1, limit);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Solution solution = getSolutionFromResultSet(resultSet);

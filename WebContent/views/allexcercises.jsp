@@ -8,13 +8,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>All excercises</title>
+<%@ include file="headInclude.jsp" %>
 </head>
 <body>
-	<table style="width: 100%" border="1">
+	<div class="wrapper">
+		<%@ include file="header.jsp"%>
+		<div class="content">
+			<div class="headerMini">All excercises list</div>
+	<table class="view">
 		<tr>
 			<th>id</th>
-			<th>Title</th>
-			<th>Description</th>
+			<th>title</th>
+			<th>description</th>
+			<th></th>
 		</tr>
 
 		<c:forEach items="${allExcercises}" var="excercise">
@@ -22,9 +28,12 @@
 				<td>${excercise.id}</td>
 				<td>${excercise.title}</td>
 				<td>${excercise.description}</td>
+				<td><a href="excercisedetails?id=${excercise.id}" style="text-decoration: none;"><span class="details">details</span></a></td>
 			</tr>
 		</c:forEach>
 
-	</table>
+	</table>		</div>
+		<%@ include file="footer.jsp"%>
+	</div>
 </body>
 </html>
