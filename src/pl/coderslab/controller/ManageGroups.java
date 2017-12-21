@@ -23,11 +23,4 @@ public class ManageGroups extends HttpServlet {
 		request.setAttribute("allGroupsToManage", allGroups);
 		getServletContext().getRequestDispatcher("/views/managegroups.jsp").forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		String name = request.getParameter("name");
-		GroupDao.saveToDB(new Group(name));
-	}
 }

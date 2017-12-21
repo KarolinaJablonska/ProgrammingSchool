@@ -16,8 +16,18 @@
 		<a href="allexcercises">
 		<div class="panelMenu">List of excercises</div>
 		</a>
+		<a href="allsolutions">
+		<div class="panelMenu">List	of solutions</div>
+		</a>
 		<a href="allgroups">
 		<div class="panelMenu">List	of groups</div>
+		</a>
+		<div style="clear:both"></div>
+		<a href="manageusers">
+		<div class="panelMenu">Manage users</div>
+		</a>
+		<a href="assignextouser">
+		<div class="panelMenu" style="padding: 25px;">Assign excercise to user</div>
 		</a>
 		<a href="allusers">
 		<div class="panelMenu">List of</br> users</div>
@@ -26,11 +36,11 @@
 		<a href="manageexcercises">
 		<div class="panelMenu">Manage excercises</div>
 		</a>
+		<a href="managesolutions">
+		<div class="panelMenu">Manage solutions</div>
+		</a>
 		<a href="managegroups">
 		<div class="panelMenu">Manage groups</div>
-		</a>
-		<a href="manageusers">
-		<div class="panelMenu">Manage users</div>
 		</a>
 		<div style="clear:both"></div>
 

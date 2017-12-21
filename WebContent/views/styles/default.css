@@ -8,6 +8,7 @@ body {
 
 .wrapper {
 	margin-top: 10px;
+	margin-bottom: 10px;
 	margin-left: auto;
 	margin-right: auto;
 	width: 1000px;
@@ -38,6 +39,8 @@ header {
 	text-transform: uppercase;
 	background-color: #999999;
 	padding: 5px;
+	border-left: 30px solid #eead31;
+	border-right: 30px solid #eead31;
 }
 
 footer {
@@ -71,7 +74,7 @@ a.panelIcon {
 	float: left;
 	box-sizing: border-box;
 	margin-bottom: 10px;
-	transition: all .2s ease-in;
+	transition: all .1s ease-in;
 }
 
 a.panelIcon:first-child {
@@ -139,14 +142,14 @@ tr:hover {
 	letter-spacing: 3px;
 	height: 200px;
 	transition: all .1s ease-in;
-	padding: 55px;
+	padding: 50px;
 	box-sizing: border-box;
+	border: 1px dotted #c0c0c0;
 }
 
 .panelMenu:hover {
 	background-color: #eead31;
 	font-size: 40px;
-	padding: 45px;
 }
 
 a.add {

@@ -26,7 +26,7 @@ public class AddExcercise extends HttpServlet {
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		ExcerciseDao.saveToDB(new Excercise(title, description));
-		response.sendRedirect("./allexcercises");
+		response.sendRedirect("./manageexcercises");
 	}
 
 }

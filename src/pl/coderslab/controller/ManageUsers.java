@@ -23,15 +23,4 @@ public class ManageUsers extends HttpServlet {
 		request.setAttribute("allUsersToManage", allUsers);
 		getServletContext().getRequestDispatcher("/views/manageusers.jsp").forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		int person_group_id = Integer.parseInt(request.getParameter("person_group_id"));
-		String username = request.getParameter("username");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-
-		UserDao.saveToDB(new User(person_group_id, username, email, password));
-	}
 }

@@ -25,6 +25,6 @@ public class AddGroup extends HttpServlet {
 
 		String name = request.getParameter("name");
 		GroupDao.saveToDB(new Group(name));
-		response.sendRedirect("./allgroups");
+		response.sendRedirect("./managegroups");
 	}
 }

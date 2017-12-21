@@ -23,13 +23,4 @@ public class ManageExcercises extends HttpServlet {
 		request.setAttribute("allExcercisesToManage", allExcercises);
 		getServletContext().getRequestDispatcher("/views/manageexcercises.jsp").forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		String title = request.getParameter("title");
-		String description = request.getParameter("description");
-		ExcerciseDao.saveToDB(new Excercise(title, description));
-	}
-
 }

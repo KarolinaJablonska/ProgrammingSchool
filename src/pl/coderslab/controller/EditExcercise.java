@@ -33,6 +33,6 @@ public class EditExcercise extends HttpServlet {
 		String description = request.getParameter("description");
 		excerciseToEdit.setAttributes(title, description);
 		ExcerciseDao.saveToDB(excerciseToEdit);
-		response.sendRedirect("./allexcercises");
+		response.sendRedirect("./manageexcercises");
 	}
 }

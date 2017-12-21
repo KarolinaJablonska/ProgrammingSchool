@@ -18,6 +18,6 @@ public class DeleteExcercise extends HttpServlet {
 			throws ServletException, IOException {
 		int excerciseId = Integer.parseInt(request.getParameter("id"));
 		ExcerciseDao.delete(ExcerciseDao.findById(excerciseId));
-		response.sendRedirect("./allexcercises");
+		response.sendRedirect("./manageexcercises");
 	}
 }

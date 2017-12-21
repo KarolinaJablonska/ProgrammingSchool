@@ -18,6 +18,6 @@ public class DeleteGroup extends HttpServlet {
 			throws ServletException, IOException {
 		int groupId = Integer.parseInt(request.getParameter("id"));
 		GroupDao.delete(GroupDao.findById(groupId));
-		response.sendRedirect("./allgroups");
+		response.sendRedirect("./managegroups");
 	}
 }

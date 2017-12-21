@@ -35,6 +35,6 @@ public class EditUser extends HttpServlet {
 		String password = request.getParameter("password");
 		userToEdit.setAttributes(person_group_id, username, email, password);
 		UserDao.saveToDB(userToEdit);
-		response.sendRedirect("./allusers");
+		response.sendRedirect("./manageusers");
 	}
 }

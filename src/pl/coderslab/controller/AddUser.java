@@ -27,6 +27,6 @@ public class AddUser extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		UserDao.saveToDB(new User(person_group_id, username, email, password));
-		response.sendRedirect("./allusers");
+		response.sendRedirect("./manageusers");
 	}
 }

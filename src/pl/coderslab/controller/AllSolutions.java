@@ -1,22 +1,25 @@
 package pl.coderslab.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.coderslab.dao.UserDao;
+import pl.coderslab.dao.SolutionDao;
+import pl.coderslab.model.Solution;
 
-@WebServlet("/deleteuser")
-public class DeleteUser extends HttpServlet {
+@WebServlet("/allsolutions")
+public class AllSolutions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		long userId = Long.parseLong(request.getParameter("id"));
-		UserDao.delete(UserDao.findById(userId));
-		response.sendRedirect("./manageusers");
+		List<Solution> allSolutions = SolutionDao.findAll();
+		request.setAttribute("allSolutions", allSolutions);
+		getServletContext().getRequestDispatcher("/views/allsolutions.jsp").forward(request, response);
 	}
 }

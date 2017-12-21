@@ -32,6 +32,6 @@ public class EditGroup extends HttpServlet {
 		String name = request.getParameter("name");
 		groupToEdit.setAttributes(name);
 		GroupDao.saveToDB(groupToEdit);
-		response.sendRedirect("./allgroups");
+		response.sendRedirect("./managegroups");
 	}
 }
