@@ -9,7 +9,7 @@
 		<tr>
 			<td>${group.id}</td>
 			<td>${group.name}</td>
-			<td><a href="groupmembers?id=${solution.id}"
+			<td><a href="groupmembers?id=${group.id}"
 				style="text-decoration: none;"><span class="details">members</span></a></td>
 		</tr>
 	</c:forEach>

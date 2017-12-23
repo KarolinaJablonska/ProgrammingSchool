@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import pl.coderslab.model.User;
 import sql.DbManager;
 
@@ -13,9 +15,15 @@ public class UserDao {
 	private static final String FIND_ALL_QUERY = "SELECT * FROM Users";
 	private static final String FIND_ALL_BY_GROUP_ID_QUERY = "SELECT * FROM Users WHERE person_group_id = ?";
 	private static final String FIND_BY_ID_QUERY = "SELECT * FROM Users WHERE id=?";
+	private static final String FIND_BY_EMAIL_QUERY = "SELECT * FROM Users WHERE email=?";
 	private static final String DELETE_BY_ID_QUERY = "DELETE FROM Users WHERE id = ?";
 	private static final String ADD_NEW_QUERY = "INSERT INTO Users(username, email, password, person_group_id) VALUES(?,?,?,?)";
 	private static final String UPDATE_QUERY = "UPDATE Users SET username = ?, email = ?, person_group_id = ?, password = ? WHERE id = ?";
+
+	public static boolean passwordMatches(String candidate, long userId) {
+		String password = UserDao.findById(userId).getPassword();
+		return BCrypt.checkpw(candidate, password);
+	}
 
 	public static ArrayList<User> findAll() {
 		try {
@@ -33,8 +41,21 @@ public class UserDao {
 			statement.setLong(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				User user = getUserFromResultSet(resultSet);
-				return user;
+				return getUserFromQuery(resultSet);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+	public static User findByEmail(String email) {
+		try {
+			PreparedStatement statement = DbManager.getPreparedStatement(FIND_BY_EMAIL_QUERY);
+			statement.setString(1, email);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				return getUserFromQuery(resultSet);
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -104,13 +125,12 @@ public class UserDao {
 		ResultSet resultSet = statement.executeQuery();
 
 		while (resultSet.next()) {
-			User user = getUserFromResultSet(resultSet);
-			usersList.add(user);
+			usersList.add(getUserFromQuery(resultSet));
 		}
 		return usersList;
 	}
 
-	private static User getUserFromResultSet(ResultSet resultSet) throws SQLException {
+	private static User getUserFromQuery(ResultSet resultSet) throws SQLException {
 		User user = new User();
 		user.setId(resultSet.getLong("id"));
 		user.setPerson_group_id(resultSet.getInt("person_group_id"));

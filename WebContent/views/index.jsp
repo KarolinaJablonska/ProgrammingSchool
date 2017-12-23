@@ -11,6 +11,7 @@
 <%@ include file="headInclude.jsp"%>
 </head>
 <body>
+	<a href="userpanel" class="userpanellink">User panel</a>
 	<div class="wrapper">
 		<%@ include file="header.jsp"%>
 		<div class="content">		

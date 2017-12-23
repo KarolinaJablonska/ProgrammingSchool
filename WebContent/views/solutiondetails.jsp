@@ -15,7 +15,8 @@
 			<div class="beforeEdit">
 				<b>Solution id: </b> ${solutionInDetail.id}</br> 
 				<b>Created: </b>${solutionInDetail.created}</br>
-				<b>Last updated: </b>${user.username}</br> 
+				<b>Last updated: </b>${solutionInDetail.updated}</br> 
+				<b>Description: </br></b>${solutionInDetail.description}</br> 
 				<b>Refers to excercise no.</b>${solutionInDetail.excercise_id}</br> 
 				<b>Assigned to user no. </b>${solutionInDetail.users_id}
 			</div>

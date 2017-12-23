@@ -77,7 +77,10 @@ public class UsersManager {
 		System.out.println("Enter person_group_id:");
 		int person_group_id = Interaction.scanIntNumber();
 		User user = UserDao.findById(id);
-		user.setAttributes(person_group_id, username, email, password);
+		user.setUsername(username);
+		user.setEmail(email);
+		user.setHashedPassword(password);
+		user.setPerson_group_id(person_group_id);
 		UserDao.saveToDB(user);
 	}
 

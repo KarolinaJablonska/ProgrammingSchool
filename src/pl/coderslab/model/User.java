@@ -15,10 +15,13 @@ public class User {
 	}
 
 	public User(int person_group_id, String username, String email, String password) {
-		setAttributes(person_group_id, username, email, password);
+		this.person_group_id = person_group_id;
+		this.username = username;
+		this.email = email;
+		setHashedPassword(password);
 	}
 
-	public void setAttributes(int person_group_id, String username, String email, String password) {
+	public void setAttributesNoHashed(int person_group_id, String username, String email, String password) {
 		this.person_group_id = person_group_id;
 		this.username = username;
 		this.email = email;
@@ -58,11 +61,14 @@ public class User {
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
-		String hash = BCrypt.hashpw(password, BCrypt.gensalt());
-		this.password = hash;
+		this.password = password;
+	}
+
+	public void setHashedPassword(String password) {
+		this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
 	}
 }
