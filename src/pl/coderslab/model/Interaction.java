@@ -2,6 +2,10 @@ package pl.coderslab.model;
 
 import java.util.Scanner;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 public class Interaction {
 
 	private static Scanner scan = new Scanner(System.in);
@@ -63,5 +67,15 @@ public class Interaction {
 		java.util.Date utilDate = new java.util.Date();
 		java.sql.Date date = new java.sql.Date(utilDate.getTime());
 		return date;
+	}
+
+	public static void deleteCookie(String cookieName, HttpServletRequest request, HttpServletResponse response) {
+		Cookie[] cookies = request.getCookies();
+		for (Cookie c : cookies) {
+			if (c.getName().equals(cookieName)) {
+				c.setMaxAge(0);
+				response.addCookie(c);
+			}
+		}
 	}
 }

@@ -11,7 +11,7 @@
 <%@ include file="headInclude.jsp"%>
 </head>
 <body>
-	<%@ include file="userbox.jsp"%>
+	<c:if test="${not empty loggedIn}"><%@ include file="userbox.jsp"%></c:if>
 	<div class="wrapper">
 		<%@ include file="headeruser.jsp"%>
 		<div class="content">

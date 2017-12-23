@@ -20,8 +20,17 @@ public class EditProfile extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		getServletContext().getRequestDispatcher("/views/editprofile.jsp").forward(request, response);
 
+		HttpSession session = request.getSession();
+
+		if (session.getAttribute("loggedIn") != null) {
+			boolean loggedIn = (boolean) session.getAttribute("loggedIn");
+			if (loggedIn) {
+				getServletContext().getRequestDispatcher("/views/editprofile.jsp").forward(request, response);
+			}
+		} else {
+			response.sendRedirect("./userauthentication");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

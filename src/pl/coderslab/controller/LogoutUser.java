@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import pl.coderslab.model.Interaction;
+
 @WebServlet("/logoutuser")
 public class LogoutUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -18,6 +20,7 @@ public class LogoutUser extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.removeAttribute("loggedIn");
 		session.removeAttribute("userId");
+		session.invalidate();
 		response.sendRedirect("./userpanel");
 	}
 

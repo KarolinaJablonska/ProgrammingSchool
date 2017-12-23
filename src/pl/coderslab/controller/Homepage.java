@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pl.coderslab.dao.SolutionDao;
+import pl.coderslab.model.Interaction;
 import pl.coderslab.model.Solution;
 
 @WebServlet("")

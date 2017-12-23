@@ -3,6 +3,7 @@
 	<ol>
 		<li>${user.email}
 			<ul>
+				<li><a href="userpanel">Homepage</a></li>
 				<li><a href="editprofile">Edit profile</a></li>
 				<li><a href="logoutuser">Log out</a></li>
 			</ul>

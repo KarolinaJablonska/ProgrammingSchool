@@ -75,15 +75,17 @@ a:after {
 
 a.panelIcon {
 	display: block;
+	box-sizing: border-box;
+	text-align: center;
+	letter-spacing: 10px;
+	text-transform: uppercase;
 	text-decoration: none;
+	font-weight: 700;
 	width: 500px;
 	background-color: #00c5cd;
-	text-align: center;
-	font-size: 35px;
-	letter-spacing: 2px;
-	padding: 15px;
+	font-size: 25px;
+	padding: 10px;
 	float: left;
-	box-sizing: border-box;
 	margin-bottom: 10px;
 	transition: all .1s ease-in;
 }
@@ -308,7 +310,15 @@ a.logout {
 	background-color: #eead31;
 }
 
-
+.loginfailed {
+	letter-spacing: 3px;
+	width: 100%;
+	text-align: center;
+	padding: 10px;
+	font-size: 20px;
+	color: red;
+	box-sizing: border-box;
+}
 
 
 

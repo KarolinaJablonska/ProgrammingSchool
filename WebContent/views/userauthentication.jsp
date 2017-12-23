@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,16 +13,19 @@
 <body>
 
 	<div class="wrapper">
-			<%@ include file="headeruser.jsp"%>
+		<%@ include file="headeruser.jsp"%>
 		<div class="content">
 			<div class="headerMini">Log in</div>
+			<c:if test="${cookie.containsKey('loginFailed')}">
+				<div class="loginfailed">Incorrect login or password</div>
+			</c:if>
 			<div class="formdiv">
 				<form method="POST" action='./userauthentication'>
 					<input name="email" type="TEXT" placeholder="email"
 						onfocus="this.placeholder=''" onblur="this.placeholder='email'" />
 					<input name="password" type="password" placeholder="password"
 						onfocus="this.placeholder=''" onblur="this.placeholder='password'" />
-					</br> <input type="SUBMIT" value="Log in"/>
+					</br> <input type="SUBMIT" value="Log in" />
 				</form>
 			</div>
 		</div>
