@@ -27,7 +27,7 @@ public class SolutionDao {
 			PreparedStatement statement = DbManager.getPreparedStatement(FIND_ALL_SOLUTUIONS_QUERY);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Solution solution = getSolutionFromResultSet(resultSet);
+				Solution solution = getSolutionFromQueryResult(resultSet);
 				solutions.add(solution);
 			}
 			return solutions;
@@ -44,7 +44,7 @@ public class SolutionDao {
 			statement.setInt(1, limit);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Solution solution = getSolutionFromResultSet(resultSet);
+				Solution solution = getSolutionFromQueryResult(resultSet);
 				solutions.add(solution);
 			}
 			return solutions;
@@ -60,7 +60,7 @@ public class SolutionDao {
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				return getSolutionFromResultSet(resultSet);
+				return getSolutionFromQueryResult(resultSet);
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -74,7 +74,7 @@ public class SolutionDao {
 			statement.setInt(1, excerciseId);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				return getSolutionFromResultSet(resultSet);
+				return getSolutionFromQueryResult(resultSet);
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -89,7 +89,7 @@ public class SolutionDao {
 			statement.setLong(2, userId);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				return getSolutionFromResultSet(resultSet);
+				return getSolutionFromQueryResult(resultSet);
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -104,7 +104,7 @@ public class SolutionDao {
 			statement.setLong(1, users_id);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Solution solution = getSolutionFromResultSet(resultSet);
+				Solution solution = getSolutionFromQueryResult(resultSet);
 				userSolutions.add(solution);
 			}
 			return userSolutions;
@@ -121,7 +121,7 @@ public class SolutionDao {
 			statement.setLong(1, excercise_id);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Solution solution = getSolutionFromResultSet(resultSet);
+				Solution solution = getSolutionFromQueryResult(resultSet);
 				userSolutions.add(solution);
 			}
 			return userSolutions;
@@ -179,7 +179,7 @@ public class SolutionDao {
 		}
 	}
 
-	private static Solution getSolutionFromResultSet(ResultSet resultSet) throws SQLException {
+	private static Solution getSolutionFromQueryResult(ResultSet resultSet) throws SQLException {
 		Solution solution = new Solution();
 		solution.setId(resultSet.getInt("id"));
 		solution.setCreated(resultSet.getDate("created"));

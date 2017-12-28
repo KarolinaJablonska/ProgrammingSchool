@@ -36,7 +36,6 @@ public class UserAuthentication extends HttpServlet {
 			String password = request.getParameter("password");
 
 			if (UserDao.passwordMatches(password, userId)) {
-				System.out.println("password matches");
 				HttpSession session = request.getSession();
 
 				session.setAttribute("loggedIn", true);

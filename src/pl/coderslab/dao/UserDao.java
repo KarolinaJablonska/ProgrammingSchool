@@ -41,7 +41,7 @@ public class UserDao {
 			statement.setLong(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				return getUserFromQuery(resultSet);
+				return getUserFromQueryResult(resultSet);
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -55,7 +55,7 @@ public class UserDao {
 			statement.setString(1, email);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				return getUserFromQuery(resultSet);
+				return getUserFromQueryResult(resultSet);
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -125,12 +125,12 @@ public class UserDao {
 		ResultSet resultSet = statement.executeQuery();
 
 		while (resultSet.next()) {
-			usersList.add(getUserFromQuery(resultSet));
+			usersList.add(getUserFromQueryResult(resultSet));
 		}
 		return usersList;
 	}
 
-	private static User getUserFromQuery(ResultSet resultSet) throws SQLException {
+	private static User getUserFromQueryResult(ResultSet resultSet) throws SQLException {
 		User user = new User();
 		user.setId(resultSet.getLong("id"));
 		user.setPerson_group_id(resultSet.getInt("person_group_id"));

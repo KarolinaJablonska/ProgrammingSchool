@@ -22,7 +22,7 @@ public class GroupDao {
 			PreparedStatement statement = DbManager.getPreparedStatement(FIND_ALL_GROUPS_QUERY);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Group group = getGroupFromResultSet(resultSet);
+				Group group = getGroupFromQueryResult(resultSet);
 				groups.add(group);
 			}
 			return groups;
@@ -38,7 +38,7 @@ public class GroupDao {
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Group group = getGroupFromResultSet(resultSet);
+				Group group = getGroupFromQueryResult(resultSet);
 				return group;
 			}
 		} catch (Exception e) {
@@ -88,7 +88,7 @@ public class GroupDao {
 		}
 	}
 
-	private static Group getGroupFromResultSet(ResultSet resultSet) throws SQLException {
+	private static Group getGroupFromQueryResult(ResultSet resultSet) throws SQLException {
 		Group group = new Group();
 		group.setId(resultSet.getInt("id"));
 		group.setName(resultSet.getString("name"));

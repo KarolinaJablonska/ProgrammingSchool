@@ -43,7 +43,7 @@ public class ExcerciseDao {
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Excercise excercise = getExcerciseFromResultSet(resultSet);
+				Excercise excercise = getExcerciseFromQueryResult(resultSet);
 				return excercise;
 			}
 		} catch (Exception e) {
@@ -139,13 +139,13 @@ public class ExcerciseDao {
 		ResultSet resultSet = statement.executeQuery();
 
 		while (resultSet.next()) {
-			Excercise excercise = getExcerciseFromResultSet(resultSet);
+			Excercise excercise = getExcerciseFromQueryResult(resultSet);
 			excercisesList.add(excercise);
 		}
 		return excercisesList;
 	}
 
-	private static Excercise getExcerciseFromResultSet(ResultSet resultSet) throws SQLException {
+	private static Excercise getExcerciseFromQueryResult(ResultSet resultSet) throws SQLException {
 		Excercise excercise = new Excercise();
 		excercise.setId(resultSet.getInt("id"));
 		excercise.setTitle(resultSet.getString("title"));
