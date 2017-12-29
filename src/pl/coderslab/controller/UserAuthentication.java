@@ -18,8 +18,6 @@ import pl.coderslab.model.User;
 public class UserAuthentication extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private boolean authenticationPassed = false;
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		getServletContext().getRequestDispatcher("/views/userauthentication.jsp").forward(request, response);
@@ -28,6 +26,7 @@ public class UserAuthentication extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		boolean authenticationPassed = false;
 		String email = request.getParameter("email");
 		User user = UserDao.findByEmail(email);
 

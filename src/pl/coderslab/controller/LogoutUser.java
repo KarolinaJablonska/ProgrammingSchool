@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import pl.coderslab.model.Interaction;
-
 @WebServlet("/logoutuser")
 public class LogoutUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,5 +21,4 @@ public class LogoutUser extends HttpServlet {
 		session.invalidate();
 		response.sendRedirect("./userpanel");
 	}
-
 }
