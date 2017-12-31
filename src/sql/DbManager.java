@@ -3,6 +3,7 @@ package sql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -12,17 +13,17 @@ import javax.sql.DataSource;
 public class DbManager {
 
 	private static DataSource dataSource;
-	static Connection connection;
+	private static Connection connection;
 
-	public static Connection getConn() throws SQLException {
-		return getInstance().getConnection();
+	private static void setNewConnection() throws SQLException {
+		connection = getInstance().getConnection();
 	}
 
 	private static DataSource getInstance() {
 		if (dataSource == null) {
 			try {
 				Context ctx = new InitialContext();
-				dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/ProgrammingSchool");
+				dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/AnimalsClash");
 			} catch (NamingException e) {
 				e.printStackTrace();
 			}
@@ -32,7 +33,10 @@ public class DbManager {
 
 	public static PreparedStatement getPreparedStatement(String sqlQuery) {
 		try {
-			return getConn().prepareStatement(sqlQuery);
+			if (connection == null) {
+				setNewConnection();
+			}
+			return connection.prepareStatement(sqlQuery);
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} catch (Exception e) {
@@ -43,7 +47,10 @@ public class DbManager {
 
 	public static PreparedStatement getPreparedStatement(String sqlQuery, String[] generatedColumns) {
 		try {
-			return getConn().prepareStatement(sqlQuery, generatedColumns);
+			if (connection == null) {
+				setNewConnection();
+			}
+			return connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} catch (Exception e) {

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Context>
-	<Resource name="jdbc/ProgrammingSchool"
+	<Resource name="jdbc/AnimalsClash"
 	auth="Application" type="javax.sql.DataSource"
 	username="root"
 	password="coderslab"
 	driverClassName="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost:3306/ProgrammingSchool?useSSL=false"
-	maxTotal="-1"
-	maxIdle="100"
+	url="jdbc:mysql://localhost:3306/AnimalsClash?useSSL=false"
+	maxTotal="16"
+	maxIdle="8"
 	maxWaitMillis="10000" />
 </Context>
