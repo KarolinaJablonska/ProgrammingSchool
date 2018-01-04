@@ -23,7 +23,7 @@ public class DbManager {
 		if (dataSource == null) {
 			try {
 				Context ctx = new InitialContext();
-				dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/AnimalsClash");
+				dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/ProgrammingSchool");
 			} catch (NamingException e) {
 				e.printStackTrace();
 			}
