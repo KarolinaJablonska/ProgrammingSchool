@@ -4,7 +4,7 @@
 	<Resource name="jdbc/ProgrammingSchool"
 	auth="Application" type="javax.sql.DataSource"
 	username="root"
-	password="coderslab"
+	password="password"
 	driverClassName="com.mysql.jdbc.Driver"
 	url="jdbc:mysql://localhost:3306/ProgrammingSchool?useSSL=false"
 	maxTotal="16"
